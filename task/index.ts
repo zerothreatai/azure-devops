@@ -4,12 +4,13 @@ import axios from 'axios';
 async function run() {
     try {
         const token = core.getInput('zt_token',  true);
+        const onPremProxyUrl = core.getInput('on_prem_proxy_api_url',  false);
         const waitForAnalysisInput = core.getInput('wait_for_analysis', false);
         const waitForAnalysis = waitForAnalysisInput?.toLowerCase() === 'true';
         console.log(`Initiating security scan request`);
 
         // Initiate the scan
-        const apiUrl = `https://api.zerothreat.ai/api/scan/devops`;
+        const apiUrl = `${onPremProxyUrl || 'https://api.zerothreat.ai'}/api/scan/devops`;
         const initiateResponse = await axios.post(apiUrl, { token });
         const response = initiateResponse.data;
         const code = response.code;
@@ -24,7 +25,7 @@ async function run() {
             if(intervalId)
                 clearInterval(intervalId);
             try {
-                const axiosResponse = await axios.get(`https://api.zerothreat.ai/api/scan/devops/${code}`);
+                const axiosResponse = await axios.get(`${apiUrl}/${code}`);
                 const response = axiosResponse.data;
                 if (response.scanStatus >= 4) {
                     core.setResult(core.TaskResult.Succeeded,`Scan completed successfully, for more detail please visit the portal.`);

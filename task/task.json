@@ -34,6 +34,13 @@
             "label": "Wait for analysis",
             "defaultValue": false,
             "required": false
+        },
+        {
+            "name": "on_prem_proxy_api_url",
+            "type": "string",
+            "label": "Proxy API Url",
+            "defaultValue": "",
+            "required": false
         }
     ],
     "execution": {  

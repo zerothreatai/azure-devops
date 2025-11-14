@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "zt-azure-devops",
     "name": "ZeroThreat AI DAST Scanner",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "ZeroThreatAIDASTScanner",
     "public": true,
     "targets": [
